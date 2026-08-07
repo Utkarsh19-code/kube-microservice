@@ -1,6 +1,11 @@
 name: Terraform Destroy
 on: workflow_dispatch
 permissions: {id-token: write, contents: read}
+env:
+  AWS_REGION: us-east-1
+  ECR_REGISTRY: ${{ vars.ECR_REGISTRY }}
+  FRONTEND_ECR_REPOSITORY: ${{ vars.FRONTEND_ECR_REPOSITORY }}
+  PRODUCT_API_ECR_REPOSITORY: ${{ vars.PRODUCT_API_ECR_REPOSITORY }}
 jobs:
   destroy:
     runs-on: ubuntu-latest
@@ -8,7 +13,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: aws-actions/configure-aws-credentials@v4
-        with: {role-to-assume: ${{ vars.AWS_ROLE_ARN }}, aws-region: us-east-1}
+        with: 
+          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+          
       - uses: hashicorp/setup-terraform@v3
       - run: terraform init
       - run: terraform destroy -auto-approve
