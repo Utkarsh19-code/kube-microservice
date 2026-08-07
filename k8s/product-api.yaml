@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-api
+  namespace: microservices
+spec:
+  replicas: 1
+  selector: {matchLabels: {app: product-api}}
+  template:
+    metadata: {labels: {app: product-api}}
+    spec:
+      containers:
+        - name: product-api
+          image: IMAGE_PLACEHOLDER
+          ports: [{containerPort: 5000}]
+          readinessProbe: {httpGet: {path: /health, port: 5000}, initialDelaySeconds: 3, periodSeconds: 5}
+          livenessProbe: {httpGet: {path: /health, port: 5000}, initialDelaySeconds: 10, periodSeconds: 10}
+          resources:
+            requests: {cpu: "25m", memory: "48Mi"}
+            limits: {cpu: "150m", memory: "128Mi"}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-api
+  namespace: microservices
+spec:
+  selector: {app: product-api}
+  ports: [{port: 5000, targetPort: 5000}]
+  type: ClusterIP
