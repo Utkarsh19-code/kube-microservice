@@ -1,6 +1,6 @@
 name: Terraform
 on:
-  workflow_dispatch:
+ # workflow_dispatch:
   push:
     branches:
     - main
@@ -21,7 +21,7 @@ jobs:
           echo "Ref: ${{ github.ref }}"
           echo "Branch: ${{ github.ref_name }}"
           echo "Event: ${{ github.event_name }}"
-          
+
       - uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::656260749189:role/github-actions-k8s-microservices
