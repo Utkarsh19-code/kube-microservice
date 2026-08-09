@@ -13,7 +13,7 @@ variable "instance_type" {
 variable "key_name" { type = string }
 variable "ssh_cidr" {
     type = string
-    default = "103.208.68.77/32"
+    default = "0.0.0.0/32"
 }
 variable "root_volume_size" {
     type = number

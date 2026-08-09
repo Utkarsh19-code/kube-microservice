@@ -1,8 +1,8 @@
 aws_region = "us-east-1"
 project_name = "k8s-microservices-demo"
 instance_type = "t3.micro"
-key_name = "YOUR_EXISTING_EC2_KEYPAIR"
-ssh_cidr = "YOUR_PUBLIC_IP/32"
+key_name = "kube-microservice"
+ssh_cidr = "103.208.68.77/32"
 root_volume_size = 10
-github_repository = "YOUR_GITHUB_USERNAME/YOUR_REPOSITORY"
+github_repository = "Utkarsh19-code/kube-microservice"
 github_branch = "main"
