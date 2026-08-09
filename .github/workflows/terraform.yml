@@ -15,6 +15,12 @@ jobs:
     defaults: {run: {working-directory: terraform}}
     steps:
       - uses: actions/checkout@v4
+      - name: Debug GitHub context
+        run: |
+          echo "Repository: ${{ github.repository }}"
+          echo "Ref: ${{ github.ref }}"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Event: ${{ github.event_name }}"
       - uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::656260749189:role/github-actions-k8s-microservices
