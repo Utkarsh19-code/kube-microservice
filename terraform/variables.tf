@@ -13,13 +13,17 @@ variable "instance_type" {
 variable "key_name" { type = string }
 variable "ssh_cidr" {
     type = string
-    default = "0.0.0.0/32"
+    default = "103.208.68.77/32"
 }
 variable "root_volume_size" {
     type = number
     default = 10
 }
-variable "github_repository" { type = string }
+variable "github_repository" {
+    type = string
+    default = "Utkarsh19-code/kube-microservice"
+}
+
 variable "github_branch" {
     type = string
     default = "main"
