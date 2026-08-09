@@ -21,8 +21,7 @@ jobs:
           echo "Ref: ${{ github.ref }}"
           echo "Branch: ${{ github.ref_name }}"
           echo "Event: ${{ github.event_name }}"
-      - name: Debug OIDC claims
-        uses: github/actions-oidc-debugger@v1
+          
       - uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::656260749189:role/github-actions-k8s-microservices
