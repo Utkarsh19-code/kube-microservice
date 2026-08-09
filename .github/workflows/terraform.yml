@@ -2,9 +2,13 @@ name: Terraform
 on:
   workflow_dispatch:
   push:
-    branches: [main]
-    paths: ["terraform/**"]
-permissions: {id-token: write, contents: read}
+    branches:
+    - main
+    paths: 
+    - "terraform/**"
+permissions:
+  id-token: write
+  contents: read
 jobs:
   terraform:
     runs-on: ubuntu-latest
@@ -13,8 +17,9 @@ jobs:
       - uses: actions/checkout@v4
       - uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ vars.AWS_ROLE_ARN }}
+          role-to-assume: arn:aws:iam::656260749189:role/github-actions-k8s-microservices
           aws-region: us-east-1
+      - run: aws sts get-caller-identity
       - uses: hashicorp/setup-terraform@v3
       - run: terraform init
       - run: terraform fmt -check -recursive
